@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Apurva Chavan • AI Engineer for Datrics (W21)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg-page: #f4f5fb;
+      --bg-page-accent: #e0f2fe;
+      --bg-card: #ffffff;
+      --border-soft: #d1d5db;
+      --accent: #0f766e;   /* teal */
+      --accent-soft: #ccfbf1;
+      --accent-strong: #ea580c; /* orange */
+      --text-main: #111827;
+      --text-soft: #4b5563;
+      --text-muted: #6b7280;
+      --radius-card: 20px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.09);
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --transition-fast: 0.18s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-main);
+      background:
+        radial-gradient(circle at 0 0, var(--bg-page-accent) 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, #fee2e2 0, transparent 55%),
+        var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 16px 56px;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 18px;
+      background: conic-gradient(from 180deg, #0f766e, #14b8a6, #fb923c, #0f766e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: #f9fafb;
+      box-shadow: 0 14px 30px rgba(15, 118, 110, 0.45);
+    }
+
+    .logo-text-top {
+      font-size: 0.96rem;
+      color: var(--text-soft);
+    }
+
+    .logo-text-top span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .logo-text-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.86rem;
+    }
+
+    nav a {
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      background: transparent;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    nav a:hover {
+      background: rgba(15, 118, 110, 0.06);
+      border-color: rgba(15, 118, 110, 0.4);
+      color: #022c22;
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-left {
+      padding: 22px 22px 20px;
+      border-radius: var(--radius-card);
+      background: linear-gradient(135deg, #ffffff, #ecfeff);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-muted);
+      background: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge.accent {
+      border-color: rgba(15, 118, 110, 0.7);
+      background: #ecfdf5;
+      color: #065f46;
+    }
+
+    .badge.accent strong {
+      color: #047857;
+    }
+
+    .hero-title {
+      font-size: clamp(1.9rem, 3vw, 2.3rem);
+      margin: 4px 0 6px;
+      color: #111827;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      max-width: 540px;
+    }
+
+    .hero-subtitle strong {
+      color: #111827;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      font-size: 0.86rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0f766e, #14b8a6);
+      color: #ecfdf5;
+      box-shadow: 0 14px 30px rgba(15, 118, 110, 0.45);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 38px rgba(15, 118, 110, 0.55);
+    }
+
+    .btn-ghost {
+      background: #ffffff;
+      border-color: rgba(148, 163, 184, 0.7);
+      color: var(--text-muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(15, 118, 110, 0.6);
+      color: #065f46;
+      background: #f0fdfa;
+    }
+
+    .hero-mini {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .hero-mini span {
+      color: #ea580c;
+      font-weight: 500;
+    }
+
+    .hero-right {
+      border-radius: var(--radius-card);
+      background: #ffffff;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+    }
+
+    .hero-right-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .hero-right-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(234, 88, 12, 0.4);
+      background: #fff7ed;
+      color: #9a3412;
+    }
+
+    .job-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1.1fr;
+      gap: 10px;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 540px) {
+      .job-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .job-col {
+      border-radius: 14px;
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      background: #f9fafb;
+      padding: 10px 10px 8px;
+    }
+
+    .job-label {
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+    }
+
+    .job-value {
+      font-weight: 500;
+      color: var(--text-main);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: baseline;
+    }
+
+    .job-tag {
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      font-size: 0.72rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: #ffffff;
+      color: var(--text-muted);
+    }
+
+    .job-note {
+      margin-top: 6px;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .job-note strong {
+      color: #047857;
+    }
+
+    main {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 960px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    section {
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      font-size: 0.96rem;
+      margin: 0 0 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    h2 span {
+      width: 26px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #0f766e, #ea580c);
+    }
+
+    .about-card,
+    .how-card,
+    .projects-card,
+    .stack-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 16px 16px 14px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .about-text {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .about-text strong {
+      color: var(--text-main);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      font-size: 0.78rem;
+    }
+
+    .chip {
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-muted);
+      background: #f9fafb;
+    }
+
+    .chip.highlight {
+      border-color: rgba(15, 118, 110, 0.7);
+      color: #065f46;
+      background: #ecfdf5;
+    }
+
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 4px 0 0;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .list li {
+      margin-bottom: 6px;
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .list li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent);
+      font-size: 0.72rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+      font-size: 0.86rem;
+    }
+
+    .project {
+      border-radius: 16px;
+      padding: 10px 11px 10px;
+      background: #f9fafb;
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.1fr);
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 720px) {
+      .project {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .project-main-title {
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .project-main-title span {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .project-tag {
+      font-size: 0.74rem;
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      color: var(--text-muted);
+      background: #ffffff;
+    }
+
+    .project-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 6px;
+      text-align: right;
+    }
+
+    .project-link {
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      border: 1px solid rgba(15, 118, 110, 0.6);
+      color: #065f46;
+      background: #ecfdf5;
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .project-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(15, 118, 110, 0.25);
+      border-color: #0f766e;
+      background: #d1fae5;
+    }
+
+    .project-note {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .stack-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      font-size: 0.8rem;
+      margin-bottom: 5px;
+      align-items: center;
+    }
+
+    .stack-label {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+    }
+
+    .stack-pill {
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      background: #f9fafb;
+      color: var(--text-soft);
+      font-size: 0.78rem;
+    }
+
+    footer {
+      margin-top: 26px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(209, 213, 219, 0.9);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    footer a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo">
+        <div class="logo-badge">AC</div>
+        <div>
+          <div class="logo-text-top">Apurva Chavan • <span>AI Engineer</span></div>
+          <div class="logo-text-sub">Built for Datrics (W21) — AI-powered Insurance Claim Processing</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#how">How I Can Help</a>
+        <a href="#projects">Relevant Projects</a>
+        <a href="#stack">Stack</a>
+        <a href="https://github.com/Apurva1205" target="_blank" rel="noopener">GitHub ↗</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-left">
+        <div class="badge-row">
+          <div class="badge accent"><span>Role</span><strong>AI Engineer</strong></div>
+          <div class="badge">Datrics HCP • Healthcare Coding Automation</div>
+          <div class="badge">Remote • LLMs • Data Science</div>
+        </div>
+
+        <h1 class="hero-title">
+          Aligning my <span>ML + NLP + LLM</span> work with Datrics' mission to fix insurance claims.
+        </h1>
+
+        <p class="hero-subtitle">
+          I’m a <strong>Python-first Data Scientist & AI Engineer</strong> with hands-on experience in
+          <strong>machine learning, NLP, LLMs, and analytics</strong>. I want to help Datrics HCP reduce claim
+          errors, speed up coding, and use AI as a reliable co-pilot for healthcare teams.
+        </p>
+
+        <div class="hero-cta-row">
+          <a href="#how" class="btn btn-primary">See how I can help Datrics →</a>
+          <a href="#projects" class="btn btn-ghost">Explore relevant GitHub projects</a>
+          <div class="hero-mini">Current focus: <span>LLMs, context engineering, & production-ready ML</span></div>
+        </div>
+      </div>
+
+      <aside class="hero-right">
+        <div class="hero-right-header">
+          <div class="hero-right-title">Datrics (W21) – AI Engineer</div>
+          <div class="pill">Generative AI • Healthcare</div>
+        </div>
+        <div class="job-grid">
+          <div class="job-col">
+            <div class="job-label">Role Snapshot</div>
+            <div class="job-value">
+              AI Engineer
+              <span class="job-tag">NLP</span>
+              <span class="job-tag">LLMs</span>
+              <span class="job-tag">Context Engineering</span>
+            </div>
+            <div class="job-note">
+              Focus: <strong>Insurance claim accuracy</strong>, reduced processing time, fewer costly errors.
+            </div>
+          </div>
+          <div class="job-col">
+            <div class="job-label">Stack & Environment</div>
+            <div class="job-value">
+              <span class="job-tag">Python</span>
+              <span class="job-tag">ML & Analytics</span>
+              <span class="job-tag">Data Science</span>
+            </div>
+            <div class="job-note">
+              Comfortable working across <strong>data pipelines, ML models, and API layers</strong>.
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <main>
+      <div>
+        <section id="about">
+          <h2><span></span> About Apurva</h2>
+          <div class="about-card">
+            <p class="about-text">
+              I’m <strong>Apurva Chavan</strong>, a Python programmer and Data Scientist with a strong focus on
+              <strong>machine learning, NLP, and LLM applications</strong>. Most of my work lives on GitHub under the
+              handle <strong><code>Apurva1205</code></strong>, where I build and experiment with
+              <strong>text classification models, LLM-powered tools, time-series forecasting, and end-to-end ML workflows.</strong>
+            </p>
+            <p class="about-text">
+              I enjoy taking <strong>messy real-world data</strong> and turning it into <strong>reliable, explainable systems</strong> that can run in
+              production, whether that’s for hiring workflows, financial analytics, or (in this case) healthcare claims.
+            </p>
+            <div class="chips">
+              <div class="chip highlight">Python • ML • NLP • LLMs</div>
+              <div class="chip">GitHub: <code>github.com/Apurva1205</code></div>
+              <div class="chip">Data Science & Analytics</div>
+              <div class="chip">Model evaluation & error analysis</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="how">
+          <h2><span></span> How I Can Help Datrics HCP</h2>
+          <div class="how-card">
+            <ul class="list">
+              <li><strong>Build and fine-tune NLP models</strong> that extract key entities (diagnosis, procedure, modifiers, payer rules)
+                from clinical and billing text to reduce manual coding effort.</li>
+              <li>Design <strong>LLM-powered validation and suggestion pipelines</strong> that highlight potential coding errors or missing
+                information before claims reach payers.</li>
+              <li>Use analytics to <strong>learn from historical denials and approvals</strong> and feed those patterns back into the models to
+                improve claim pass rates over time.</li>
+              <li>Shape <strong>context engineering</strong>—defining the right prompts, retrieval strategies, and guardrails so LLMs behave in
+                a safe, deterministic way for healthcare.</li>
+              <li>Contribute to <strong>robust evaluation frameworks</strong>: precision/recall for coding suggestions, false
+                positive/negative analysis, and cost-impact metrics for claim corrections.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <aside>
+        <section id="projects">
+          <h2><span></span> Relevant GitHub Projects</h2>
+          <div class="projects-card">
+            <div class="projects-grid">
+              <article class="project">
+                <div>
+                  <div class="project-main-title">AI Resume Enhancer <span>(NLP + LLM-style scoring)</span></div>
+                  <p class="project-desc">
+                    Parses resumes and job descriptions, scores fit, and suggests missing skills. Similar to building a smart
+                    assistant on top of semi-structured text, like claims.
+                  </p>
+                  <div class="project-tags">
+                    <span class="project-tag">Python</span>
+                    <span class="project-tag">NLP</span>
+                    <span class="project-tag">Ranking & Scoring</span>
+                  </div>
+                </div>
+                <div class="project-actions">
+                  <a class="project-link" href="https://github.com/Apurva1205/AI-RESUME-ENHANCER" target="_blank" rel="noopener">View on GitHub ↗</a>
+                  <div class="project-note">Shows ability to build pipelines around unstructured text.</div>
+                </div>
+              </article>
+
+              <article class="project">
+                <div>
+                  <div class="project-main-title">News Category Classification <span>(Text classification)</span></div>
+                  <p class="project-desc">
+                    Fine-tuned models to classify news into categories, working with messy real-world text. Similar ideas can be used
+                    for classifying claims, denial reasons, or payer responses.
+                  </p>
+                  <div class="project-tags">
+                    <span class="project-tag">NLP</span>
+                    <span class="project-tag">PyTorch</span>
+                    <span class="project-tag">BERT fine-tuning</span>
+                  </div>
+                </div>
+                <div class="project-actions">
+                  <a class="project-link" href="https://github.com/Apurva1205/News-Category-Classification" target="_blank" rel="noopener">View on GitHub ↗</a>
+                  <div class="project-note">Demonstrates experience with label design & evaluation.</div>
+                </div>
+              </article>
+
+              <article class="project">
+                <div>
+                  <div class="project-main-title">Text Classification Model Using AI <span>(End-to-end)</span></div>
+                  <p class="project-desc">
+                    Built and evaluated models for text classification, including data cleaning, feature engineering, model training,
+                    and reporting.
+                  </p>
+                  <div class="project-tags">
+                    <span class="project-tag">Machine Learning</span>
+                    <span class="project-tag">Text Classification</span>
+                    <span class="project-tag">Python</span>
+                  </div>
+                </div>
+                <div class="project-actions">
+                  <a class="project-link" href="https://github.com/Apurva1205/Text-Classification" target="_blank" rel="noopener">View on GitHub ↗</a>
+                  <div class="project-note">Transferable skills for modeling claim outcomes.</div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="stack">
+          <h2><span></span> Stack & Focus Areas</h2>
+          <div class="stack-card">
+            <div class="stack-row">
+              <span class="stack-label">Core</span>
+              <span class="stack-pill">Python</span>
+              <span class="stack-pill">Pandas & NumPy</span>
+              <span class="stack-pill">Scikit-learn</span>
+            </div>
+            <div class="stack-row">
+              <span class="stack-label">NLP / LLM</span>
+              <span class="stack-pill">Transformers</span>
+              <span class="stack-pill">Text classification</span>
+              <span class="stack-pill">Prompting & context design</span>
+            </div>
+            <div class="stack-row">
+              <span class="stack-label">Analytics</span>
+              <span class="stack-pill">Experimentation</span>
+              <span class="stack-pill">Model evaluation</span>
+              <span class="stack-pill">Visualization</span>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer>
+      <div>Made by Apurva Chavan for Datrics (W21) — AI Engineer role.</div>
+      <div>GitHub: <a href="https://github.com/Apurva1205" target="_blank" rel="noopener">Apurva1205</a></div>
+    </footer>
+  </div>
+</body>
+</html>
